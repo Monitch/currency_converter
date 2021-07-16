@@ -1,27 +1,31 @@
 package SpringMVC.Converter;
 
 public class Converter {
-    //FUTURE
-    int USD = 1;
-    int EUR = 2;
-    int RUB = 3;
-    int UAH = 27;
 
+    double USD = 27.21;
+    double EUR = 32.13;
+    double RUB = 0.37;
 
-    public int convert(int value, String fromCurrency, String toCurrency){
-        switch (toCurrency) {
-            case "usd":
-                value = value * USD;
-                break;
-            case "eur":
-                value = value * EUR;
-                break;
-            case "rub":
-                value = value * RUB;
-                break;
-            case "uah":
-                value = value * UAH;
-                break;
+    public double convert(double value, String fromCurrency, String toCurrency) {
+        value = convertToUAH(value, fromCurrency);
+        value = convertToCurrency(value, toCurrency);
+        return value;
+    }
+
+    private double convertToUAH(double value, String Currency) {
+        switch (Currency) {
+            case "USD" -> value = value * USD;
+            case "EUR" -> value = value * EUR;
+            case "RUB" -> value = value * RUB;
+        }
+        return value;
+    }
+
+    private double convertToCurrency(double value, String Currency) {
+        switch (Currency) {
+            case "USD" -> value = value / USD;
+            case "EUR" -> value = value / EUR;
+            case "RUB" -> value = value / RUB;
         }
         return value;
     }

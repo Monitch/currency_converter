@@ -5,21 +5,27 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.DecimalFormat;
+
 @Controller
 public class CurrencyController {
     @RequestMapping()
-    public String index(Model model) {
+    public String index() {
         return "index";
     }
 
     @PostMapping()
-    public String getValue(@RequestParam("value") String value,
+    public String getValue(@RequestParam("value") double value,
                            @RequestParam("toCurrency") String toCurrency,
-                           @RequestParam("fromCurrency")  String fromCurrency,
+                           @RequestParam("fromCurrency") String fromCurrency,
                            Model model) {
         Converter converter = new Converter();
-        value = String.valueOf(converter.convert(Integer.parseInt(value), fromCurrency, toCurrency));
-        model.addAttribute("value", value);
+        DecimalFormat dF = new DecimalFormat("#.##");
+        double startedValue = value;
+
+        value = converter.convert(value, fromCurrency, toCurrency);
+
+        model.addAttribute("value", startedValue+" " +fromCurrency + " = " + dF.format(value) + " " +toCurrency);
         return "index";
     }
 }
