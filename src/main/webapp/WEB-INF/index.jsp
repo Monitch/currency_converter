@@ -30,7 +30,7 @@
     <br/><br/>
     <input type="submit" value="Convert"/>
 </form>
-<h3 th:text=${value}></h3>
 </div>
+<h3 style="text-align: center" th:text=${value}></h3>
 </body>
 </html>

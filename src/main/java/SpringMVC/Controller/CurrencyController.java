@@ -9,7 +9,7 @@ import java.text.DecimalFormat;
 
 @Controller
 public class CurrencyController {
-    @RequestMapping()
+    @RequestMapping
     public String index() {
         return "index";
     }
